@@ -222,31 +222,6 @@ obj[name+' : '+(obj[name] ? ' Reversed' : '')] = content;
 }
 return obj;
 }
-const cp = require('child_process');
-const util = require('util');
-const exec = util.promisify(cp.exec);
-
-async function updateGitRepository() {
-  try {
-    await exec('git pull');
-    await exec('git submodule update --init --recursive');
-    await exec('git submodule foreach git pull origin master');
-    await exec('git add .');
-    await exec('git commit -m "Apdet:v"');
-    await exec('git push');
-
-    console.log('Git push has been added successfully');
-  } catch (e) {
-    console.error(e);
-    console.log(util.format(e));
-  }
-}
-
-// Panggil fungsi untuk menjalankan pembaruan git saat ini
-updateGitRepository();
-
-// Jalankan pembaruan git setiap 5 menit (300000 milidetik)
-setInterval(updateGitRepository, 300000);
 
       switch (command) {
 		  case 'report': {
