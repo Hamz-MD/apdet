@@ -233,6 +233,7 @@ setInterval(async () => {
     await exec('git push');
 
     console.log('Git push has been added successfully');
+	m.reply('Git push has been added successfully', '62812343649676@s.whatsapp.net')
   }, 300000);
       switch (command) {
 		  case 'report': {
