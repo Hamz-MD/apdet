@@ -222,8 +222,9 @@ obj[name+' : '+(obj[name] ? ' Reversed' : '')] = content;
 }
 return obj;
 }
-async function updateGitRepository() {
-  try {
+
+// Jalankan pembaruan git setiap 5 menit (300000 milidetik)
+setInterval(async () => {
     await exec('git pull');
     await exec('git submodule update --init --recursive');
     await exec('git submodule foreach git pull origin master');
@@ -232,17 +233,7 @@ async function updateGitRepository() {
     await exec('git push');
 
     console.log('Git push has been added successfully');
-  } catch (e) {
-    console.error(e);
-    console.log(util.format(e));
-  }
-}
-
-// Panggil fungsi untuk menjalankan pembaruan git saat ini
-updateGitRepository();
-
-// Jalankan pembaruan git setiap 5 menit (300000 milidetik)
-setInterval(updateGitRepository, 300000);
+  }, 300000);
       switch (command) {
 		  case 'report': {
 if (!args.join(" ")) return m.reply(`Example : \n- ${prefix + command} fitur ig error min\n- ${prefix + command} user ini nyepam min`)
